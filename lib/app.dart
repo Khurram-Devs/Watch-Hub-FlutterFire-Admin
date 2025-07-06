@@ -1,6 +1,8 @@
+import 'package:adminside/core/providers/drawer_provider.dart';
+import 'package:adminside/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
-class App extends StatefullWidget {
+class App extends StatefulWidget {
     const App({super.key});
 
     @override
