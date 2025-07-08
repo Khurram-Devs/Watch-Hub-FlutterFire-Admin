@@ -1,5 +1,11 @@
 import 'package:adminside/changes/colors.dart';
+import 'package:adminside/core/providers/route_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class Sidebar extends StatefulWidget {
   final Function(String) onSlectPage;
@@ -68,41 +74,46 @@ class _SidebarState extends State<Sidebar> {
                 SidebarItem(
                   title: 'Dashboard',
                   icon: 'asset/icons/dashboard.svg',
-                  isSelected: widget.selectedPage == "Dashboard",
+                  isSelected: widget.selectedPage == "dashboard",
                   onTap: () {
-                    widget.onSlectPage("Dashboard");
+                    widget.onSlectPage("dashboard");
+                    _GoRouter("/dashboard");
                   },
                 ),
                 SidebarItem(
                   title: 'Orders',
                   icon: 'asset/icons/bag.svg',
-                  isSelected: widget.selectedPage == "Orders",
+                  isSelected: widget.selectedPage == "orders",
                   onTap: () {
-                    widget.onSlectPage("Orders");
+                    widget.onSlectPage("orders");
+                    _GoRouter("/orders");
                   },
                 ),
                 SidebarItem(
                   title: 'Analytics',
                   icon: 'asset/icons/chart.svg',
-                  isSelected: widget.selectedPage == "Analytics",
+                  isSelected: widget.selectedPage == "analytics",
                   onTap: () {
-                    widget.onSlectPage("Analytics");
+                    widget.onSlectPage("analytics");
+                    _GoRouter("/analytics");
                   },
                 ),
                 SidebarItem(
                   title: 'Customers',
                   icon: 'asset/icons/users.svg',
-                  isSelected: widget.selectedPage == "Customers",
+                  isSelected: widget.selectedPage == "customers",
                   onTap: () {
-                    widget.onSlectPage("Customers");
+                    widget.onSlectPage("customers");
+                    _GoRouter("/customers");
                   },
                 ),
                 SidebarItem(
                   title: 'Menu',
                   icon: 'asset/icons/document.svg',
-                  isSelected: widget.selectedPage == "Menu",
+                  isSelected: widget.selectedPage == "menu",
                   onTap: () {
-                    widget.onSlectPage("Menu");
+                    widget.onSlectPage("menu");
+                    _GoRouter("/menu");
                   },
                 ),
                 const Expanded(child: SizedBox()),
@@ -112,7 +123,7 @@ class _SidebarState extends State<Sidebar> {
                     width: 270,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(10),
                       color: Colors.grey.shade100,
                     ),
                     child: Column(
@@ -123,7 +134,7 @@ class _SidebarState extends State<Sidebar> {
                             radius: 35,
                             lineWidth: 5,
                             percent: 0.86,
-                            circulartStrokeCap: CirculartStrokeCap.round,
+                            circularStrokeCap: CircularStrokeCap.round,
                             backgroundColor: Colors.transparent,
                             progressColor: primaryColor,
                             center: Text(
@@ -154,30 +165,42 @@ class _SidebarState extends State<Sidebar> {
                         ),
                         TextButton(
                           style: const ButtonStyle(
-                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 15, horizontal: 0)),
-                            overlayColor: WidgetStatePropertyAll(Colors.transparent)
+                            padding: WidgetStatePropertyAll(
+                              EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                            ),
+                            overlayColor: WidgetStatePropertyAll(
+                              Colors.transparent,
+                            ),
                           ),
-                          onPressed: () {
-                          
-                        }, child: Text(
-                          'Upgrade',
-                          style: GoogleFonts.inter(
-                            color: primaryColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          onPressed: () {},
+                          child: Text(
+                            'Upgrade',
+                            style: GoogleFonts.inter(
+                              color: primaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),)
+                        ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 50,),
+                SizedBox(height: 50),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _GoRouter(String route) {
+    GoRouter.of(context).go(route);
+    Provider.of<RouteProvider>(
+      context,
+      listen: false,
+    ).saveRouteToLocalStorage(route);
   }
 }
 
@@ -214,7 +237,7 @@ class SidebarItem extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       icon,
-                      heigth: 20,
+                      height: 20,
                       width: 20,
                       color: isSelected ? Colors.white : Colors.black45,
                     ),
