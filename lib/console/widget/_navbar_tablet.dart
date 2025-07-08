@@ -44,7 +44,7 @@ class _NavbarTabletState extends State<NavbarTablet> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   icon: SvgPicture.asset(
-                    'assets/icons/search.svg',
+                    '../../../assets/icons/search.svg',
                     color: Colors.black,
                   ),
                   hintText: 'Search...',
@@ -55,12 +55,12 @@ class _NavbarTabletState extends State<NavbarTablet> {
           const SizedBox(width: 16),
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/mail.svg'),
+            icon: SvgPicture.asset('../../../assets/icons/mail.svg'),
           ),
           const SizedBox(width: 10),
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/bell.svg'),
+            icon: SvgPicture.asset('../../../assets/icons/bell.svg'),
           ),
         ],
       ),

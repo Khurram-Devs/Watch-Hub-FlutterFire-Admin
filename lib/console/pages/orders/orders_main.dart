@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
@@ -22,7 +23,7 @@ class _OrdersPageState extends State<OrdersPage> {
   final TextEditingController _searchController = TextEditingController();
   int _selectedValue = 0;
   int _rowPerPage = 6;
-  late OrdersDataSource _ordersDataSource;
+  OrdersDataSource? _ordersDataSource;
   List<OrderModel> _orders = [];
   List<OrderModel> _filteredOrders = [];
   late OrderProvider orderProvider;
@@ -31,19 +32,33 @@ class _OrdersPageState extends State<OrdersPage> {
   void initState() {
     super.initState();
     orderProvider = Provider.of<OrderProvider>(context, listen: false);
-    _updateOrdersData();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _updateOrdersData();
+    });
   }
 
-  _updateOrdersData() {
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _updateOrdersData() {
+    final orders =
+        _selectedValue == 0
+            ? orderProvider.orders
+            : orderProvider.getOrdersByStatus(
+              OrdersUtils.names[_selectedValue],
+            );
+
     setState(() {
-      _orders =
-          _selectedValue == 0
-              ? orderProvider.orders
-              : orderProvider.getOrdersByStatus(
-                OrdersUtils.names[_selectedValue],
-              );
+      _orders = orders;
       _filteredOrders = _orders;
-      _ordersDataSource = OrdersDataSource(orders: _orders, context: context);
+      _ordersDataSource = OrdersDataSource(
+        orders: _filteredOrders,
+        context: context,
+      );
     });
   }
 
@@ -73,13 +88,16 @@ class _OrdersPageState extends State<OrdersPage> {
           _filteredOrders = _orders;
         }
       }
-      _ordersDataSource.updateData(_filteredOrders);
+      _ordersDataSource!.updateData(_filteredOrders);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    if (_ordersDataSource == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -146,14 +164,18 @@ class _OrdersPageState extends State<OrdersPage> {
         selectedItemColor: primaryColor,
         itemTextStyle: TextStyle(color: Colors.black),
       ),
-      child: SfDataPage(
-        firtPageItemVisible: false,
+      child: SfDataPager(
+        delegate: _ordersDataSource!, // ✅ FIXED: named parameter
+        firstPageItemVisible: false,
         lastPageItemVisible: false,
         navigationItemWidth: 100,
         availableRowsPerPage: const [6, 12, 18],
         visibleItemsCount: 3,
-        pageCount: (_filteredOrders.length / _rowPerPage).ceil().toDouble(),
-        _ordersDataSource,
+        pageCount:
+            (_filteredOrders.isEmpty
+                    ? 1
+                    : (_filteredOrders.length / _rowPerPage).ceil())
+                .toDouble(),
         onRowsPerPageChanged: (value) {
           setState(() {
             _rowPerPage = value!;
@@ -182,11 +204,11 @@ class _OrdersPageState extends State<OrdersPage> {
         gridLineStrokeWidth: 0,
       ),
       child: SfDataGrid(
-        showCheckedColumn: false,
+        showCheckboxColumn: false,
         columnWidthMode: ColumnWidthMode.fill,
         shrinkWrapRows: true,
         rowHeight: Responsive.isDesktop(context) ? 90 : 120,
-        source: _ordersDataSource,
+        source: _ordersDataSource!,
         columns: _buildGridColumns(),
       ),
     );
@@ -208,9 +230,9 @@ class _OrdersPageState extends State<OrdersPage> {
       columnName: columnName,
       width:
           columnName == "Orders" && Responsive.isDesktop(context)
-              ? 280
+              ? 150
               : columnName == "Customer" && Responsive.isDesktop(context)
-              ? 200
+              ? 150
               : double.nan,
       label: Container(
         padding: EdgeInsets.symmetric(
@@ -250,7 +272,7 @@ class _OrdersPageState extends State<OrdersPage> {
           decoration: InputDecoration(
             border: InputBorder.none,
             icon: SvgPicture.asset(
-              'assets/icons/search.svg',
+              '../../../../assets/icons/search.svg',
               height: 20,
               color: Colors.black,
             ),

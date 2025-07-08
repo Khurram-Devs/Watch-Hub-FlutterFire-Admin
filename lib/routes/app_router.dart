@@ -1,3 +1,4 @@
+import 'package:adminside/routes/app_router.gr.dart';
 import 'package:adminside/routes/error_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

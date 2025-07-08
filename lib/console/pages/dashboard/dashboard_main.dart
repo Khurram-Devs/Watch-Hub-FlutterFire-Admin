@@ -9,6 +9,6 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Responsive /* Not Found in video yet! */ (mobile: DashboardPageMobile(), tablet: DashboardPageTablet(), desktop: DashboardPageDesktop())
+  return const Responsive (mobile: DashboardPageMobile(), tablet: DashboardPageTablet(), desktop: DashboardPageDesktop());
   }
 }

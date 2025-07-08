@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class OrderModel {
   final Order order;
   final DateTime date;
@@ -21,25 +23,142 @@ class Order {
   final String product;
   Order({
     required this.id,
-    required this.product
+    required this.product,
   });
 }
 
+final DateFormat customFormat = DateFormat('dd-MM-yyyy');
+
 List<OrderModel> demoOrders = [
   OrderModel(
-    order: Order(id: 'ID001', product: 'product 1'),
-    date: DateTime.parse("2025-7-7"),
-    customer: "customerName",
-    orderStatus: "Paid",
-    paymentStatus: "On Delivery",
+  order: Order(id: 'ID001', product: 'product 1'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "On Delivery",
+    paymentStatus: "Paid",
     price: 45.55,
   ),
   OrderModel(
     order: Order(id: 'ID002', product: 'product 2'),
-    date: DateTime.parse("2025-6-17"),
-    customer: "customerName",
-    orderStatus: "Paid",
-    paymentStatus: "Delivered",
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Delivered",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),
+  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),
+    OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),
+    OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID002', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Jhon Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
+    price: 38.15,
+  ),  OrderModel(
+    order: Order(id: 'ID003', product: 'product 2'),
+    date: customFormat.parse("17-11-2024"),
+    customer: "Tate Andrew",
+    orderStatus: "Cancelled",
+    paymentStatus: "Unpaid",
     price: 38.15,
   ),
 ];

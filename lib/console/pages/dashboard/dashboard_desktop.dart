@@ -26,7 +26,7 @@ class DashboardPageDesktop extends StatelessWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  'assets/images/header_dashboard_bg.png',
+                  '../../../../assets/images/header_dashboard_bg.jpg',
                   height:
                       screenWidth > 1800
                           ? 220

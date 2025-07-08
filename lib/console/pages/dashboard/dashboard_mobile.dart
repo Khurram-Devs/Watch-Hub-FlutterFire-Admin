@@ -13,6 +13,7 @@ class DashboardPageMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final screenWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
@@ -22,7 +23,7 @@ class DashboardPageMobile extends StatelessWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  'assets/images/header_dashboard_bg.png',
+                  '../../../../assets/images/header_dashboard_bg.jpg',
                   height: 300,
                   width: screenWidth,
                   fit: BoxFit.fill,
@@ -38,10 +39,12 @@ class DashboardPageMobile extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisExtent: 10,
+                      mainAxisExtent: 180,
                       crossAxisSpacing: 10,
                     ),
+                    itemCount: data.length,
                     itemBuilder: (context, index) {
+                      if (index >= data.length) return const SizedBox();
                       return Card(
                         shadowColor: Colors.black26,
                         color: Colors.transparent,

@@ -8,8 +8,8 @@ class Data {
 
 
 final List<Data> data = [
-  Data(num: "345", title: "Total Menu", icon: "assets/icons/menu_dash.svg"),
-  Data(num: "\$21,254", title: "Total Revenue", icon: "assets/icons/activity_dash.svg"),
-  Data(num: "361", title: "Total Customer", icon: "assets/icons/customer_dash.svg"),
-  Data(num: "361", title: "Total Orders", icon: "assets/icons/order_dash.svg"),
+  Data(num: "345", title: "Total Menu", icon: "../../../assets/icons/document.svg"),
+  Data(num: "\$21,254", title: "Total Revenue", icon: "../../../assets/icons/activity.svg"),
+  Data(num: "361", title: "Total Customer", icon: "../../../assets/icons/users.svg"),
+  Data(num: "361", title: "Total Orders", icon: "../../../assets/icons/bag.svg"),
 ];

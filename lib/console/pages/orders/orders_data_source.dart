@@ -3,33 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:adminside/core/res/responsive.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class OrdersDataSource extends DataGridSource {
   List<DataGridRow> _dataGridRows = [];
   List<OrderModel> _orders;
-  BuildContext context;
+  final BuildContext context;
 
   OrdersDataSource({required List<OrderModel> orders, required this.context})
-    : _orders = orders {
+      : _orders = orders {
     _updateDataGridRow();
   }
 
   @override
   List<DataGridRow> get rows => _dataGridRows;
+
   void _updateDataGridRow() {
-    _dataGridRows =
-        _orders.map<DataGridRow>((orders) {
-          return DataGridRow(
-            cells: [
-              DataGridCell(columnName: 'Orders', value: orders.order),
-              DataGridCell(columnName: 'Date', value: orders.date),
-              DataGridCell(columnName: 'Customer', value: orders.customer),
-              DataGridCell(columnName: 'Payment', value: orders.paymentStatus),
-              DataGridCell(columnName: 'Status', value: orders.orderStatus),
-              DataGridCell(columnName: 'Price', value: orders.price),
-            ],
-          );
-        }).toList();
+    _dataGridRows = _orders.map<DataGridRow>((order) {
+      return DataGridRow(cells: [
+        DataGridCell(columnName: 'Orders', value: order.order),
+        DataGridCell(columnName: 'Date', value: order.date),
+        DataGridCell(columnName: 'Customer', value: order.customer),
+        DataGridCell(columnName: 'Payment', value: order.paymentStatus),
+        DataGridCell(columnName: 'Status', value: order.orderStatus),
+        DataGridCell(columnName: 'Price', value: order.price),
+      ]);
+    }).toList();
   }
 
   void updateData(List<OrderModel> newData) {
@@ -39,89 +38,122 @@ class OrdersDataSource extends DataGridSource {
   }
 
   @override
-  DataGridRowAdapter? buildRow(DataGridRow row) {
-    final dateFormater = DateFormat('MMM d, yyyy')
-    return DataGridRowAdapter(
-      cells:
-          row.getCells().map<Widget>((cell) {
-            return Container(
-              alignment:
-                  cell.columnName == 'Orders'
-                      ? Alignment.centerLeft
-                      : Alignment.center,
-              padding: EdgeInsets.symmetric(horizontal: Responsive.isDesktop(context) ? 30 : 10, vertical: 15),
-              child:
-                  cell.columnName == 'Orders'
-                      ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            (cell.value as Order).product,
-                            style: GoogleFonts.inter(
-                              color: Colors.black,
-                              fontSize: Responsive.isDesktop(context) ? 14 : 10,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          SizedBox(height: Responsive.isDesktop(context) ?10 :5),
-                          Text(
-                            (cell.value as Order).id,
-                            style: GoogleFonts.inter(
-                              color: Colors.black45,
-                              fontSize: Responsive.isDesktop(context) ? 14:10,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      )
-                      : cell.columnName == 'Date' ? Text(
-                        dateFormater.format(cell.value),
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: Responsive.isDesktop(context) ? 14:10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ) : cell.columnName == 'Payment' ||cell.columnName == 'Status' ? 
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: Responsive.isDesktop(context) ?20 : 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: cell.value == 'Paid' || cell.value == 'Delivered' ? const Color(0xFFE7F7EF) : 
-                          cell.value == "Unpaid" ? Color(0xFFF4F0FF) : 
-                          cell.value == "Canceled" ? Color(0xFFFFF0F0) :
-                          Color(0xFFFFF0E6),
-                          
-                        ),
-                        child: Text(
-                        cell.value.toString(),
-                        style: GoogleFonts.inter(
-                          color: cell.value == 'Paid' || cell.value == 'Delivered' ? const Color(0xFF0CAF60) : 
-                          cell.value == "Unpaid" ? Color(0xFF8C62FF) : 
-                          cell.value == "Canceled" ? Color(0xFFFD6A6A) :
-                          Color(0xFFFE964A),
-                          fontSize: Responsive.isDesktop(context) ? 14:10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      )
-                       : cell.columnName == 'Price' ? Text(
-                        '\$${cell.value.toString()}',
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: Responsive.isDesktop(context) ? 14:10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ) : Text(
-                        cell.value.toString(),
-                        style: GoogleFonts.inter(
-                          color: Colors.black,
-                          fontSize: Responsive.isDesktop(context) ? 14:10,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-            );
-          }).toList(),
-    );
-  }
+  @override
+DataGridRowAdapter? buildRow(DataGridRow row) {
+  final dateFormatter = DateFormat('d-M-yy');
+  final isDesktop = Responsive.isDesktop(context);
+  final baseTextStyle = GoogleFonts.inter(
+    fontSize: isDesktop ? 14 : 11,
+    fontWeight: FontWeight.w600,
+    textStyle: TextStyle(overflow: TextOverflow.clip),
+  );
+
+  return DataGridRowAdapter(
+    cells: row.getCells().map<Widget>((cell) {
+      Widget cellWidget;
+
+      if (cell.columnName == 'Orders') {
+        final order = cell.value as Order;
+        cellWidget = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              order.product,
+              style: baseTextStyle.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              order.id,
+              style: baseTextStyle.copyWith(
+                fontWeight: FontWeight.w400,
+                color: Colors.black45,
+                fontSize: isDesktop ? 13 : 10,
+              ),
+              overflow: TextOverflow.clip,
+              softWrap: false,
+            ),
+          ],
+        );
+      } else if (cell.columnName == 'Date') {
+        cellWidget = Text(
+          dateFormatter.format(cell.value),
+          style: baseTextStyle.copyWith(color: Colors.black),
+        );
+      } else if (cell.columnName == 'Payment' || cell.columnName == 'Status') {
+        String value = cell.value.toString();
+        Color bgColor;
+        Color textColor;
+
+        switch (value) {
+          case 'Paid':
+            bgColor = const Color(0xFFE7F7EF);
+            textColor = const Color(0xFF0CAF60);
+            break;
+          case 'Unpaid':
+            bgColor = const Color(0xFFF4F0FF);
+            textColor = const Color(0xFF8C62FF);
+            break;
+          case 'Cancelled':
+          case 'Canceled':
+            bgColor = const Color(0xFFFFF0F0);
+            textColor = const Color(0xFFFD6A6A);
+            break;
+          case 'Delivered':
+            bgColor = const Color(0xFFE7F7EF);
+            textColor = const Color(0xFF0CAF60);
+            break;
+          case 'On Delivery':
+            bgColor = const Color(0xFFFFF0E6);
+            textColor = const Color(0xFFFE964A);
+            break;
+          default:
+            bgColor = Colors.grey.shade200;
+            textColor = Colors.black;
+        }
+
+        cellWidget = Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            value,
+            style: baseTextStyle.copyWith(color: textColor),
+            overflow: TextOverflow.clip,
+            softWrap: false,
+          ),
+        );
+      } else if (cell.columnName == 'Price') {
+        cellWidget = Text(
+          '\$${cell.value.toString()}',
+          style: baseTextStyle.copyWith(color: Colors.black),
+        );
+      } else {
+        cellWidget = Text(
+          cell.value.toString(),
+          style: baseTextStyle.copyWith(color: Colors.black),
+        );
+      }
+
+      return Container(
+        alignment: cell.columnName == 'Orders'
+            ? Alignment.centerLeft
+            : Alignment.center,
+        padding: EdgeInsets.symmetric(
+          horizontal: isDesktop ? 30 : 12,
+          vertical: 14,
+        ),
+        child: cellWidget,
+      );
+    }).toList(),
+  );
+}
+
 }

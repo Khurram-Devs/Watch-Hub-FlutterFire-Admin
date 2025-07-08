@@ -43,7 +43,7 @@ class NavbarDesktop extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 icon: SvgPicture.asset(
-                  'assets/icons/search.svg',
+                  '../../../assets/icons/search.svg',
                   color: Colors.black,
                 ),
                 hintText: 'Search...',
@@ -54,12 +54,12 @@ class NavbarDesktop extends StatelessWidget {
           const SizedBox(width: 16),
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/mail.svg'),
+            icon: SvgPicture.asset('../../../assets/icons/mail.svg'),
           ),
           const SizedBox(width: 10),
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/bell.svg'),
+            icon: SvgPicture.asset('../../../assets/icons/bell.svg'),
           ),
           const SizedBox(width: 16),
           Container(
@@ -70,7 +70,7 @@ class NavbarDesktop extends StatelessWidget {
           const SizedBox(width: 16),
           ClipRRect(
             borderRadius: BorderRadius.circular(60),
-            child: Image.asset('assets/images/profile.png', height: 48, width: 48,),
+            child: Image.asset('../../../assets/images/profile.png', height: 48, width: 48,),
           ),
           const SizedBox(width: 10),
                     Column(

@@ -45,7 +45,7 @@ class _SidebarState extends State<Sidebar> {
                   padding: const EdgeInsets.only(left: 40, top: 30),
                   child: Row(
                     children: [
-                      SvgPicture.asset("assets/icons/logo.svg"),
+                      SvgPicture.asset("../../../assets/icons/logo.svg", height: 50, width: 50,),
                       SizedBox(width: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,7 @@ class _SidebarState extends State<Sidebar> {
                 const SizedBox(height: 40),
                 SidebarItem(
                   title: 'Dashboard',
-                  icon: 'asset/icons/dashboard.svg',
+                  icon: '../../../assets/icons/dashboard.svg',
                   isSelected: widget.selectedPage == "dashboard",
                   onTap: () {
                     widget.onSlectPage("dashboard");
@@ -82,7 +82,7 @@ class _SidebarState extends State<Sidebar> {
                 ),
                 SidebarItem(
                   title: 'Orders',
-                  icon: 'asset/icons/bag.svg',
+                  icon: '../../../assets/icons/bag.svg',
                   isSelected: widget.selectedPage == "orders",
                   onTap: () {
                     widget.onSlectPage("orders");
@@ -91,7 +91,7 @@ class _SidebarState extends State<Sidebar> {
                 ),
                 SidebarItem(
                   title: 'Analytics',
-                  icon: 'asset/icons/chart.svg',
+                  icon: '../../../assets/icons/chart.svg',
                   isSelected: widget.selectedPage == "analytics",
                   onTap: () {
                     widget.onSlectPage("analytics");
@@ -100,7 +100,7 @@ class _SidebarState extends State<Sidebar> {
                 ),
                 SidebarItem(
                   title: 'Customers',
-                  icon: 'asset/icons/users.svg',
+                  icon: '../../../assets/icons/users.svg',
                   isSelected: widget.selectedPage == "customers",
                   onTap: () {
                     widget.onSlectPage("customers");
@@ -109,7 +109,7 @@ class _SidebarState extends State<Sidebar> {
                 ),
                 SidebarItem(
                   title: 'Menu',
-                  icon: 'asset/icons/document.svg',
+                  icon: '../../../assets/icons/document.svg',
                   isSelected: widget.selectedPage == "menu",
                   onTap: () {
                     widget.onSlectPage("menu");

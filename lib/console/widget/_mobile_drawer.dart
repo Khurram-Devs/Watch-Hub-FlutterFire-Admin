@@ -31,7 +31,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(60),
                     child: Image.asset(
-                      'assets/images/profile.png',
+                      '../../../assets/images/profile.png',
                       height: 48,
                       width: 48,
                     ),
@@ -63,7 +63,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
           ),
           SidebarItem(
             title: "Dashboard",
-            icon: 'assets/icons/dashboard.svg',
+            icon: '../../../assets/icons/dashboard.svg',
             onTap: () {
               widget.onSelectPage('dashboard');
               _GoRouter("/dashboard");
@@ -72,7 +72,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
           ),
           SidebarItem(
             title: "Orders",
-            icon: 'assets/icons/bag.svg',
+            icon: '../../../assets/icons/bag.svg',
             onTap: () {
               widget.onSelectPage('orders');
               _GoRouter("/orders");
@@ -81,7 +81,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
           ),
           SidebarItem(
             title: "Analytics",
-            icon: 'assets/icons/chart.svg',
+            icon: '../../../assets/icons/chart.svg',
             onTap: () {
               widget.onSelectPage('analytics');
               _GoRouter("/analytics");
@@ -90,7 +90,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
           ),
           SidebarItem(
             title: "Customer",
-            icon: 'assets/icons/users.svg',
+            icon: '../../../assets/icons/users.svg',
             onTap: () {
               widget.onSelectPage('customer');
               _GoRouter("/customer");
@@ -99,7 +99,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
           ),
           SidebarItem(
             title: "Menu",
-            icon: 'assets/icons/document.svg',
+            icon: '../../../assets/icons/document.svg',
             onTap: () {
               widget.onSelectPage('menu');
               _GoRouter("/menu");

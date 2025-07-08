@@ -11,8 +11,8 @@ class ConsolePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Responsive /* Not Found in video yet! */ (mobile: MobileConsole(),   
-                      table: TabletConsole(), 
+    return const Responsive(mobile: MobileConsole(),   
+                      tablet: TabletConsole(), 
                       desktop: DesktopConsole());
   }
 }

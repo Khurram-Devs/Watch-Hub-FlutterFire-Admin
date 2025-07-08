@@ -21,9 +21,6 @@ class ChartColumn extends StatelessWidget {
       ),
       primaryYAxis: const NumericAxis(
         isVisible: false,
-        minimum: 5000,
-        maximum: 50000,
-        interval: 5000,
       ),
       series: <CartesianSeries>[
         ColumnSeries<ChartColumnData, String>(
